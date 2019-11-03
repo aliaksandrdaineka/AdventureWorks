@@ -17,5 +17,5 @@ jobs:
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v1
       with: 
-        app-name: AdventureWorks.Api
+        app-name: api-app-daineka
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
