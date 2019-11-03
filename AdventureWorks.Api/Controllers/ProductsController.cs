@@ -25,6 +25,7 @@ namespace AdventureWorks.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
+
             var products = await _productsService.GetAll();
 
             if (products == null)
