@@ -13,5 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.108
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+        
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: AdventureWorks.Api
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
