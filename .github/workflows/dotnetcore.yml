@@ -9,12 +9,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
     - name: Build with dotnet
       run: dotnet build --configuration Release
+      
+    # deploy web app using Azure credentials
     - uses: azure/webapps-deploy@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        app-name: 'api-app-daineka'
