@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AdventureWorks.Data.Models;
 using AdventureWorks.Services;
+using Microsoft.Extensions.Logging;
 
 namespace AdventureWorks.Api.Controllers
 {
@@ -15,17 +16,19 @@ namespace AdventureWorks.Api.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductsService _productsService;
+        private readonly ILogger _logger;
 
-        public ProductsController(IProductsService productsService)
+        public ProductsController(IProductsService productsService, ILogger<ProductsController> logger)
         {
             _productsService = productsService;
+            _logger = logger;
         }
 
         // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
-
+            _logger.LogInformation("Get list of products");
             var products = await _productsService.GetAll();
 
             if (products == null)
@@ -42,6 +45,7 @@ namespace AdventureWorks.Api.Controllers
 
             if (product == null)
             {
+                _logger.LogWarning($"Product with id = {id} not found");
                 return NotFound();
             }
 
@@ -73,6 +77,7 @@ namespace AdventureWorks.Api.Controllers
                 //{
                 //    throw;
                 //}
+                _logger.LogError($"Error when trying to update Product with id = {id}");
                 return NotFound();
             }
 
