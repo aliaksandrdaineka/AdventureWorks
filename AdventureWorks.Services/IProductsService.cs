@@ -2,17 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AdventureWorks.Services
 {
     public interface IProductsService
     {
-        Product GetById(int id);
-        Product Create(Product product);
-        Product Update(Product product);
+        Task<Product> GetById(int id);
+        Task<Product> Create(Product product);
+        Task<Product> Update(Product product);
 
-        void Remove(Product product);
+        Task Remove(Product product);
 
-        IEnumerable<Product> GetAll();
+        Task<IEnumerable<Product>> GetAll();
     }
 }
