@@ -43,6 +43,7 @@ namespace AdventureWorks.Services
             {
                 var product = await db.Product.FindAsync(item.ProductId);
                 if (product == null) return;
+                
                 db.Product.Remove(product);
                 await db.SaveChangesAsync();
             }
