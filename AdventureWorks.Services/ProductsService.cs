@@ -42,7 +42,8 @@ namespace AdventureWorks.Services
             using (var db = new DataContext())
             {
                 var product = await db.Product.FindAsync(item.ProductId);
-                if (product == null) return;            
+                if (product == null) return;   
+                
                 db.Product.Remove(product);
                 await db.SaveChangesAsync();
             }
