@@ -14,12 +14,14 @@ namespace AdventureWorks.Api
     {
         public static void Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                        .AddJsonFile("appsettings.json")
+                        .Build();
+
             Log.Logger = new LoggerConfiguration()
-               .Enrich.FromLogContext()
-               .WriteTo.File("D:\\log.txt", Serilog.Events.LogEventLevel.Information)
-               .WriteTo.Debug(Serilog.Events.LogEventLevel.Information)
-               .WriteTo.Console(Serilog.Events.LogEventLevel.Information)
+               .ReadFrom.Configuration(configuration)
                .CreateLogger();
+
             CreateHostBuilder(args).Build().Run();
         }
 
