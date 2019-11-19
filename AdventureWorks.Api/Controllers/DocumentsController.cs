@@ -24,8 +24,9 @@ namespace AdventureWorks.Api.Controllers
 
             if (document != null)
             {
+
                 using var stream = document.OpenReadStream();
-                documentId = await _documentsService.Save(stream);
+                documentId = await _documentsService.Save(stream, document.FileName, document.ContentDisposition);
             }
 
             return CreatedAtAction("PostDocument", new { id = documentId });
