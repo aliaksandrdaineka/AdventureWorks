@@ -31,6 +31,7 @@ namespace AdventureWorks.Api
         {
             services.AddControllers();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IDocumentsService, DocumentsService>();
 
             //Register the Swagger generator, defining 1 or more Swagger documents
             //services.AddSwaggerGen(c =>
