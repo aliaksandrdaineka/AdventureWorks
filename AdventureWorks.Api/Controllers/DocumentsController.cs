@@ -29,7 +29,7 @@ namespace AdventureWorks.Api.Controllers
                 documentId = await _documentsService.Save(stream, document.FileName, document.ContentDisposition);
             }
 
-            return CreatedAtAction("PostDocument", new { id = documentId });
+            return StatusCode(StatusCodes.Status201Created, new { id = documentId });
         }
     }
 }
