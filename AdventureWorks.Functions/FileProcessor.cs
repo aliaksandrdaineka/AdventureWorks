@@ -1,3 +1,5 @@
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,11 +11,16 @@ namespace AdventureWorks.Functions
     public static class FileProcessor
     {
         [FunctionName("FileProcessor")]
-        public static void Run(
+        public static async void Run(
             [QueueTrigger("documents", Connection = "AzureWebJobsStorage")] Message message,
             [Blob("documents/{documentId}", FileAccess.Read, Connection = "AzureWebJobsStorage")] Stream blob,
             ILogger log)
         {
+            var azureServiceTokenProvider = new AzureServiceTokenProvider();
+
+            var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
+            var secret = await kv.GetSecretAsync(Environment.GetEnvironmentVariable("AzureDbConnection")).ConfigureAwait(false);
+
             byte [] bytes;
 
             using (MemoryStream ms = new MemoryStream())
@@ -22,12 +29,12 @@ namespace AdventureWorks.Functions
                 bytes = ms.ToArray();
             }
 
-            using (SqlConnection connection = new SqlConnection(Environment.GetEnvironmentVariable("DefaultConnection")))
+            using (SqlConnection connection = new SqlConnection(secret.Value))
             {
                 connection.Open();
                 var sql = $"INSERT INTO [Production].[Document] (Id, Metadata, Bytes) VALUES(@Id, @Metadata, @Bytes)";
 
-                using(SqlCommand cmd = new SqlCommand(sql, connection))
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@Id", message.DocumentId);
                     cmd.Parameters.AddWithValue("@Metadata", message.Metadata);
@@ -36,7 +43,7 @@ namespace AdventureWorks.Functions
                     cmd.ExecuteNonQuery();
                 }
             }
-            log.LogInformation($"C# Queue trigger function processed: {message}");
+            log.LogInformation("C# Queue trigger function processed: {queueTrigger}");
         }
     }
 }
