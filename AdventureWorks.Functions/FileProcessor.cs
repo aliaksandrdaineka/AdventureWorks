@@ -44,7 +44,7 @@ namespace AdventureWorks.Functions
                     cmd.ExecuteNonQuery();
                 }
             }
-            log.LogInformation("C# Queue trigger function processed: {queueTrigger}");
+            log.LogInformation($"C# Queue trigger function processed: document {message.DocumentId} saved to db");
         }
     }
 }
