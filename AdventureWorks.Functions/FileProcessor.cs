@@ -5,13 +5,14 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Data.SqlClient;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AdventureWorks.Functions
 {
     public static class FileProcessor
     {
         [FunctionName("FileProcessor")]
-        public static async void Run(
+        public static async Task Run(
             [QueueTrigger("documents", Connection = "AzureWebJobsStorage")] Message message,
             [Blob("documents/{documentId}", FileAccess.Read, Connection = "AzureWebJobsStorage")] Stream blob,
             ILogger log)
