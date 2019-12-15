@@ -5,6 +5,6 @@ namespace AdventureWorks.Services
 {
     public interface IDocumentsService
     {
-        Task<string> Save(Stream stream, string filename, string metadata);
+        Task<string> Save(Stream stream, string metadata);
     }
 }

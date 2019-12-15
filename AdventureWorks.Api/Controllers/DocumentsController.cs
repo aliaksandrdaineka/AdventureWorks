@@ -26,7 +26,7 @@ namespace AdventureWorks.Api.Controllers
             {
 
                 using var stream = document.OpenReadStream();
-                documentId = await _documentsService.Save(stream, document.FileName, document.ContentDisposition);
+                documentId = await _documentsService.Save(stream, document.ContentDisposition);
             }
 
             return StatusCode(StatusCodes.Status201Created, new { id = documentId });

@@ -2,6 +2,7 @@
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Queue;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace AdventureWorks.Services
             _queueClient = new CloudQueueClient(new Uri(_configuration["QueueStorageUri"]), credentials);
         }
 
-        public async Task<string> Save(Stream stream, string filename, string metadata)
+        public async Task<string> Save(Stream stream, string metadata)
         {
             var container = _blobClient.GetContainerReference(_configuration["StorageDocumentsContainerName"]);
             await container.CreateIfNotExistsAsync();
@@ -33,7 +34,7 @@ namespace AdventureWorks.Services
 
             var queue = _queueClient.GetQueueReference(_configuration["StorageQueueContainerName"]);
             await queue.CreateIfNotExistsAsync();
-            await queue.AddMessageAsync(new CloudQueueMessage($"Document Uploaded: {documentId}:{filename}:{metadata}"));
+            await queue.AddMessageAsync(new CloudQueueMessage(JsonConvert.SerializeObject(new { documentId, metadata })));
             return documentId;
         }
     }
