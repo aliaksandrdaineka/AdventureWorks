@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.Api", "AdventureWorks.Api\AdventureWorks.Api.csproj", "{A842CC08-7374-453F-8C1B-DC6CBB8DCBD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventureWorks.Api", "AdventureWorks.Api\AdventureWorks.Api.csproj", "{A842CC08-7374-453F-8C1B-DC6CBB8DCBD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.Data", "AdventureWorks.Data\AdventureWorks.Data.csproj", "{10B0A607-1FF9-4213-AD2F-9B97B960DAB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventureWorks.Data", "AdventureWorks.Data\AdventureWorks.Data.csproj", "{10B0A607-1FF9-4213-AD2F-9B97B960DAB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.Services", "AdventureWorks.Services\AdventureWorks.Services.csproj", "{40D3A0CF-4684-4A42-B487-E38525162BB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventureWorks.Services", "AdventureWorks.Services\AdventureWorks.Services.csproj", "{40D3A0CF-4684-4A42-B487-E38525162BB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.Functions", "AdventureWorks.Functions\AdventureWorks.Functions.csproj", "{00F12B45-7142-4844-9399-169C76BD3C4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{40D3A0CF-4684-4A42-B487-E38525162BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40D3A0CF-4684-4A42-B487-E38525162BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40D3A0CF-4684-4A42-B487-E38525162BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F12B45-7142-4844-9399-169C76BD3C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F12B45-7142-4844-9399-169C76BD3C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F12B45-7142-4844-9399-169C76BD3C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F12B45-7142-4844-9399-169C76BD3C4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
